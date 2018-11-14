@@ -1,13 +1,10 @@
 package hokumus.ui;
 
-import hokumus.dao.DbConnector;
 import hokumus.dao.KullaniciGirisDAO;
 import hokumus.model.Kullanici;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,26 +20,28 @@ public class GirisFrame extends JFrame{
 	boolean sifreDogrumu= false;
 	KullaniciGirisDAO db = new KullaniciGirisDAO();
 	public GirisFrame() {
-		setBounds(300, 350, 500, 500);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(300, 350, 300, 250);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		 
 		
 		JLabel lblKulAdi = new JLabel("Kullan\u0131c\u0131 Ad\u0131");
-		lblKulAdi.setBounds(28, 126, 152, 14);
+		lblKulAdi.setBounds(10, 68, 108, 14);
 		getContentPane().add(lblKulAdi);
 		
 		JLabel lblSifre = new JLabel("\u015Eifre");
-		lblSifre.setBounds(28, 151, 152, 14);
+		lblSifre.setBounds(10, 105, 108, 14);
 		getContentPane().add(lblSifre);
 		
 		txtKulAdi = new JTextField();
-		txtKulAdi.setBounds(190, 123, 152, 20);
+		txtKulAdi.setText("hokumus");
+		txtKulAdi.setBounds(128, 65, 152, 20);
 		getContentPane().add(txtKulAdi);
 		txtKulAdi.setColumns(10);
 		
 		txtSifre = new JTextField();
-		txtSifre.setBounds(190, 148, 152, 20);
+		txtSifre.setText("123");
+		txtSifre.setBounds(128, 102, 152, 20);
 		getContentPane().add(txtSifre);
 		txtSifre.setColumns(10);
 		
@@ -50,33 +49,47 @@ public class GirisFrame extends JFrame{
 		
 		btnGiris.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<Kullanici> users = db.getAllUsers();
-				for (Kullanici temp : users) {
-					if(temp.getKullaniciAdi().equals(txtKulAdi.getText())){
-						kullaniciVarmi = true;
-						if(temp.getSifre().equals(txtSifre.getText())){
-							sifreDogrumu= true;
-							JOptionPane.showMessageDialog(GirisFrame.this, "Hoþgeldiniz ... Sayýn "+ txtKulAdi.getText());
-							break;
-						}
-					}					
-					
+				Kullanici user = db.getKullaniciForUserName(txtKulAdi.getText());
+				if(user !=null){
+					if(user.getSifre().equals(txtSifre.getText())){
+						AnaEkran ana = new AnaEkran();
+						ana.setVisible(true);
+						GirisFrame.this.setVisible(false);
+						
+					}
+					else {
+						JOptionPane.showMessageDialog(GirisFrame.this, "Þifre Hatalý");
+					}
 				}
-				if(!kullaniciVarmi){
+				else {
 					JOptionPane.showMessageDialog(GirisFrame.this, "Böyle Bir Kullanýcý Yok...!");
 				}
-				else if(!sifreDogrumu) {
-					JOptionPane.showMessageDialog(GirisFrame.this, "Þifre Hatalý");
-				}
+//				for (Kullanici temp : users) {
+//					if(temp.getKullaniciAdi().equals(txtKulAdi.getText())){
+//						kullaniciVarmi = true;
+//						if(temp.getSifre().equals(txtSifre.getText())){
+//							sifreDogrumu= true;
+//							JOptionPane.showMessageDialog(GirisFrame.this, "Hoþgeldiniz ... Sayýn "+ txtKulAdi.getText());
+//							break;
+//						}
+//					}					
+//					
+//				}
+//				if(!kullaniciVarmi){
+//					JOptionPane.showMessageDialog(GirisFrame.this, "Böyle Bir Kullanýcý Yok...!");
+//				}
+//				else if(!sifreDogrumu) {
+//					JOptionPane.showMessageDialog(GirisFrame.this, "Þifre Hatalý");
+//				}
 			}
 		});
-		btnGiris.setBounds(251, 206, 91, 23);
+		btnGiris.setBounds(189, 155, 91, 23);
 		getContentPane().add(btnGiris);
 		
 		JButton btnIptal = new JButton("\u0130ptal");
-		btnIptal.setBounds(150, 206, 91, 23);
+		btnIptal.setBounds(79, 155, 91, 23);
 		getContentPane().add(btnIptal);
-		setTitle("Db Connectin Java");
+		setTitle("Giriþ");
 		
 		 
 	}
