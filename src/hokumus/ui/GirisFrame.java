@@ -5,6 +5,7 @@ import hokumus.model.Kullanici;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -49,13 +50,10 @@ public class GirisFrame extends JFrame{
 		
 		btnGiris.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Kullanici user = db.getKullaniciForUserName(txtKulAdi.getText());
-				if(user !=null){
-					if(user.getSifre().equals(txtSifre.getText())){
-						AnaEkran ana = new AnaEkran();
-						ana.setVisible(true);
-						GirisFrame.this.setVisible(false);
-						
+				Kullanici temp =db.getUser(txtKulAdi.getText());
+				if(temp!=null){
+					if(temp.getSifre().equals(txtSifre.getText())){
+						JOptionPane.showMessageDialog(GirisFrame.this, "Hoþgeldin deniz");
 					}
 					else {
 						JOptionPane.showMessageDialog(GirisFrame.this, "Þifre Hatalý");
@@ -64,6 +62,26 @@ public class GirisFrame extends JFrame{
 				else {
 					JOptionPane.showMessageDialog(GirisFrame.this, "Böyle Bir Kullanýcý Yok...!");
 				}
+				
+				
+				
+				
+//				Kullanici user = db.getKullaniciForUserName(txtKulAdi.getText());
+//				if(user !=null){
+//					if(user.getSifre().equals(txtSifre.getText())){
+//						AnaEkran ana = new AnaEkran();
+//						ana.setVisible(true);
+//						GirisFrame.this.setVisible(false);
+//						
+//					}
+//					else {
+//						JOptionPane.showMessageDialog(GirisFrame.this, "Þifre Hatalý");
+//					}
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(GirisFrame.this, "Böyle Bir Kullanýcý Yok...!");
+//				}
+//				List<Kullanici> users = db.getAllUsers();
 //				for (Kullanici temp : users) {
 //					if(temp.getKullaniciAdi().equals(txtKulAdi.getText())){
 //						kullaniciVarmi = true;

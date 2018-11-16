@@ -9,7 +9,7 @@ public class DbConnector {
 
 	}
 
-	static String bilg = "localhost";
+	static String bilg = "10.0.9.104";
 	static String port = "5435";
 	static String dbAdi = "deneme";
 	static String kulAdi = "postgres";
@@ -21,9 +21,7 @@ public class DbConnector {
 		try {
 			if (conn == null) {
 				Class.forName("org.postgresql.Driver");
-				conn = DriverManager.getConnection("jdbc:postgresql://" + bilg
-						+ ":" + port + "/" + dbAdi + "", "" + kulAdi + "", ""
-						+ sifre);
+				conn = DriverManager.getConnection("jdbc:postgresql://" + bilg+ ":" + port + "/" + dbAdi + "", "" + kulAdi + "", ""	+ sifre);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

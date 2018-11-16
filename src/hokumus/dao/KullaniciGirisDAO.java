@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KullaniciGirisDAO {
-	Connection conn = null;
 
 	public KullaniciGirisDAO() {
 
@@ -38,6 +37,49 @@ public class KullaniciGirisDAO {
 
 		return kullanicilar;
 	}
+	
+	
+	Connection conn = null;
+	public Kullanici getUser(String kulAdi){
+		
+		Kullanici temp = null;
+		try {
+			
+			conn = DbConnector.getConnection();
+			Statement stmt = conn.createStatement();
+			String sql = " select usr_name, pass from kullanici where usr_name='" +kulAdi +"'";
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.println(sql);
+			while(rs.next()){
+				temp= new Kullanici();
+				temp.setKullaniciAdi(rs.getString("usr_name"));
+				temp.setSifre(rs.getString("pass"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return temp;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public Kullanici getKullaniciForUserName(String kullaniciAdi) {
 		Kullanici temp = null;
