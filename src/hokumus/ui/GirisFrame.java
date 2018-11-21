@@ -53,7 +53,9 @@ public class GirisFrame extends JFrame{
 				Kullanici temp =db.getUser(txtKulAdi.getText());
 				if(temp!=null){
 					if(temp.getSifre().equals(txtSifre.getText())){
-						JOptionPane.showMessageDialog(GirisFrame.this, "Hoþgeldin deniz");
+						AnaEkran frames = new AnaEkran();
+						frames.setVisible(true);
+						GirisFrame.this.dispose();
 					}
 					else {
 						JOptionPane.showMessageDialog(GirisFrame.this, "Þifre Hatalý");

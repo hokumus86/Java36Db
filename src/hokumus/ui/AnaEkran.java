@@ -52,6 +52,15 @@ public class AnaEkran extends JFrame {
 		JMenuItem menuItemFirmaEkle = new JMenuItem("Firma Ekle");
 		menuDosya.add(menuItemFirmaEkle);
 		
+		JMenuItem menuItemUrunEkleme = new JMenuItem("\u00DCr\u00FCn Ekleme");
+		menuItemUrunEkleme.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UrunEkleme temp = new UrunEkleme();
+				temp.setVisible(true);
+			}
+		});
+		menuDosya.add(menuItemUrunEkleme);
+		
 		JMenu menuCikis = new JMenu("\u00C7\u0131k\u0131\u015F");
 		menuBar.add(menuCikis);
 		

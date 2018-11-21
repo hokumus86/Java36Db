@@ -9,7 +9,7 @@ public class DbConnector {
 
 	}
 
-	static String bilg = "10.0.9.104";
+	static String bilg = "localhost";
 	static String port = "5435";
 	static String dbAdi = "deneme";
 	static String kulAdi = "postgres";
